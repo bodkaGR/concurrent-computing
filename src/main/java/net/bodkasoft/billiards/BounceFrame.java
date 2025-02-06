@@ -8,17 +8,15 @@ import java.awt.*;
 
 public class BounceFrame extends JFrame {
 
-    private Canvas canvas;
-    private JLabel counterLabel;
+    private final Canvas canvas;
+    private final JLabel counterLabel;
     public static final int WIDTH = 450;
     public static final int HEIGHT = 350;
 
     public BounceFrame() {
         setupFrame();
-
         counterLabel = new JLabel("Pocketed: 0");
         this.canvas = new Canvas(counterLabel);
-
         addComponents();
         System.out.println("In Frame Thread name = " + Thread.currentThread().getName());
     }
@@ -41,21 +39,20 @@ public class BounceFrame extends JFrame {
         JButton buttonStart = new JButton("Start");
         JButton buttonStop = new JButton("Stop");
 
-        buttonStart.addActionListener(e -> startBallThread());
+        buttonStart.addActionListener(e -> {
+            Ball b = new Ball(canvas);
+            canvas.addBall(b);
+            BallThread thread = new BallThread(b, canvas);
+            thread.start();
+            System.out.println("Thread name = " + thread.getName());
+        });
+
         buttonStop.addActionListener(e -> System.exit(0));
 
         buttonPanel.add(buttonStart);
         buttonPanel.add(buttonStop);
         buttonPanel.add(counterLabel);
         return buttonPanel;
-    }
-
-    private void startBallThread() {
-        Ball b = new Ball(canvas);
-        canvas.add(b);
-        BallThread thread = new BallThread(b);
-        thread.start();
-        System.out.println("Thread name = " + thread.getName());
     }
 }
 

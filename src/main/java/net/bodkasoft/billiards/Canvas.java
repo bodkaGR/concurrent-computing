@@ -1,6 +1,7 @@
 package net.bodkasoft.billiards;
 
 import net.bodkasoft.billiards.ball.Ball;
+import net.bodkasoft.billiards.pocket.Pocket;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,16 +11,23 @@ import java.util.Iterator;
 
 public class Canvas extends JPanel {
 
-    private ArrayList<Ball> balls = new ArrayList<>();
-    private JLabel counterLabel;
+    private final ArrayList<Ball> balls = new ArrayList<>();
+
+    private final Pocket pocket;
+    private final JLabel counterLabel;
     private int pocketedCount = 0;
 
     public Canvas(JLabel counterLabel) {
         this.counterLabel = counterLabel;
+        this.pocket = new Pocket(getWidth(), getHeight());
     }
 
-    public void add(Ball b){
+    public void addBall(Ball b){
         this.balls.add(b);
+    }
+
+    public Pocket getPocket() {
+        return pocket;
     }
 
     @Override
@@ -27,14 +35,8 @@ public class Canvas extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        // move to pocket class
-        int pocketX = getWidth() / 2;
-        int pocketY = getHeight() - 30;
-        int pocketSize = 40;
-
-        g2.setColor(Color.red);
-        g2.fill(new Ellipse2D.Double(pocketX - pocketSize / 2, pocketY - pocketSize / 2, pocketSize, pocketSize));
-        //
+        pocket.setCanvasWidthHeight(getWidth(), getHeight());
+        pocket.draw(g2);
 
         Iterator<Ball> iterator = balls.iterator();
         while(iterator.hasNext()){
@@ -47,10 +49,5 @@ public class Canvas extends JPanel {
                 b.draw(g2);
             }
         }
-
-//        for(int i = 0; i < balls.size(); i++){
-//            Ball b = balls.get(i);
-//            b.draw(g2);
-//        }
     }
 }

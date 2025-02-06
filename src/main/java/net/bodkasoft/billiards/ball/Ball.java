@@ -1,5 +1,7 @@
 package net.bodkasoft.billiards.ball;
 
+import net.bodkasoft.billiards.pocket.Pocket;
+
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.util.Random;
@@ -7,28 +9,20 @@ import java.util.Random;
 public class Ball {
 
     private Component canvas;
+
     private static final int XSIZE = 20;
     private static final int YSIZE = 20;
+
     private int x = 0;
     private int y= 0;
+
     private int dx = 2;
     private int dy = 2;
 
-    // move to pocket class
-    private int pocketX;
-    private int pocketY;
-    int pocketSize = 40;
-    //
-
     private boolean isActive = true;
 
-    public Ball(Component c){
-        this.canvas = c;
-
-        // move to pocket class
-        this.pocketX = this.canvas.getWidth() / 2;
-        this.pocketY = this.canvas.getHeight() - 30;
-        //
+    public Ball(Component canvas){
+        this.canvas = canvas;
 
         if(Math.random() < 0.5){
             x = new Random().nextInt(this.canvas.getWidth());
@@ -39,10 +33,6 @@ public class Ball {
         }
     }
 
-//    public static void f(){
-//        int a = 0;
-//    }
-
     public void draw (Graphics2D g2){
         if (isActive) {
             g2.setColor(Color.darkGray);
@@ -50,7 +40,7 @@ public class Ball {
         }
     }
 
-    public void move(){
+    public void move(Pocket pocket){
         if (!isActive) return;
 
         x += dx;
@@ -76,8 +66,10 @@ public class Ball {
             dy = -dy;
         }
 
-        if (Math.hypot(x + XSIZE / 2 - pocketX, y + YSIZE / 2 - pocketY) < pocketSize / 2) {
+        if (pocket.isInPocket(x + XSIZE / 2, y + YSIZE / 2)) {
             isActive = false;
+            canvas.repaint();
+            return;
         }
 
         this.canvas.repaint();
