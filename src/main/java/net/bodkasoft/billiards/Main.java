@@ -1,4 +1,4 @@
-package net.bodkasoft;
+package net.bodkasoft.billiards;
 
 import javax.swing.*;
 

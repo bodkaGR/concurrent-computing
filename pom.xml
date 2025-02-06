@@ -25,7 +25,7 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                             <addClasspath>true</addClasspath>
-                            <mainClass>net.bodkasoft.Main</mainClass>
+                            <mainClass>net.bodkasoft.billiards.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
