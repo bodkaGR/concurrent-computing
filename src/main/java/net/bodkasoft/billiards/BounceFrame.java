@@ -3,9 +3,11 @@ package net.bodkasoft.billiards;
 import net.bodkasoft.billiards.ball.Ball;
 import net.bodkasoft.billiards.ball.BallThread;
 import net.bodkasoft.billiards.pocket.Pocket;
+import net.bodkasoft.billiards.utils.Pair;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 import java.util.Random;
 
 public class BounceFrame extends JFrame {
@@ -39,21 +41,32 @@ public class BounceFrame extends JFrame {
 
         JButton buttonStart = new JButton("Start");
         JButton buttonStop = new JButton("Stop");
+        JButton buttonRedB = new JButton("Red ball");
+        JButton buttonBlueB = new JButton("Blue ball");
 
-        buttonStart.addActionListener(e -> {
+        Map<JButton, Pair<Color, Integer>> buttonConfig = Map.of(
+                buttonStart, new Pair<>(Color.black, Thread.NORM_PRIORITY),
+                buttonRedB, new Pair<>(Color.red, Thread.MAX_PRIORITY),
+                buttonBlueB, new Pair<>(Color.blue, Thread.MIN_PRIORITY)
+        );
+
+        buttonConfig.forEach((button, config) -> button.addActionListener(e -> {
             int x = random.nextInt(canvas.getWidth());
             int y = random.nextInt(canvas.getHeight());
 
-            Ball ball = new Ball(x, y);
+            Ball ball = new Ball(x, y, config.getKey());
             canvas.addBall(ball);
             BallThread thread = new BallThread(ball, canvas);
+            thread.setPriority(config.getValue());
             thread.start();
             System.out.println("Thread name = " + thread.getName());
-        });
+        }));
 
         buttonStop.addActionListener(e -> System.exit(0));
 
         buttonPanel.add(buttonStart);
+        buttonPanel.add(buttonRedB);
+        buttonPanel.add(buttonBlueB);
         buttonPanel.add(buttonStop);
         buttonPanel.add(counterLabel);
         return buttonPanel;

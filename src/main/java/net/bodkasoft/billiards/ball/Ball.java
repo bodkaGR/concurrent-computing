@@ -3,6 +3,7 @@ package net.bodkasoft.billiards.ball;
 import lombok.Getter;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
 @Getter
@@ -14,10 +15,12 @@ public class Ball {
     private int x, y;
     private int dx = 2;
     private int dy = 2;
+    private final Color color;
 
-    public Ball(int x, int y){
+    public Ball(int x, int y, Color color) {
         this.x = x;
         this.y = y;
+        this.color = color;
     }
 
     public void deactivate() {
@@ -26,6 +29,11 @@ public class Ball {
 
     public boolean isActive() {
         return isActive;
+    }
+
+    public void draw(Graphics2D g2) {
+        g2.setColor(color);
+        g2.fill(new Ellipse2D.Double(x, y, diameter, diameter));
     }
 
     public void move(int width, int height){

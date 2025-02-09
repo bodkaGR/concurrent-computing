@@ -64,8 +64,7 @@ public class Canvas extends JPanel {
                 pocketedCount++;
                 counterLabel.setText("Pocketed: " + pocketedCount);
             }else {
-                g2.setColor(Color.darkGray);
-                g2.fill(new Ellipse2D.Double(ball.getX(), ball.getY(), ball.getDiameter(), ball.getDiameter()));
+                ball.draw(g2);
             }
         }
     }
