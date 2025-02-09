@@ -1,46 +1,34 @@
 package net.bodkasoft.billiards.ball;
 
-import net.bodkasoft.billiards.pocket.Pocket;
+import lombok.Getter;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
+@Getter
 public class Ball {
-
-    private Component canvas;
-
-    private static final int XSIZE = 20;
-    private static final int YSIZE = 20;
-
-    private int x = 0;
-    private int y= 0;
-
-    private int dx = 2;
-    private int dy = 2;
 
     private boolean isActive = true;
 
-    public Ball(Component canvas){
-        this.canvas = canvas;
+    private final int diameter = 20;
+    private int x, y;
+    private int dx = 2;
+    private int dy = 2;
 
-        if(Math.random() < 0.5){
-            x = new Random().nextInt(this.canvas.getWidth());
-            y = 0;
-        }else{
-            x = 0;
-            y = new Random().nextInt(this.canvas.getHeight());
-        }
+    public Ball(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 
-    public void draw (Graphics2D g2){
-        if (isActive) {
-            g2.setColor(Color.darkGray);
-            g2.fill(new Ellipse2D.Double(x, y, XSIZE, YSIZE));
-        }
+    public void deactivate() {
+        isActive = false;
     }
 
-    public void move(Pocket pocket){
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void move(int width, int height){
         if (!isActive) return;
 
         x += dx;
@@ -51,8 +39,8 @@ public class Ball {
             dx = -dx;
         }
 
-        if(x + XSIZE >= this.canvas.getWidth()){
-            x = this.canvas.getWidth() - XSIZE;
+        if(x + diameter >= width){
+            x = width - diameter;
             dx = -dx;
         }
 
@@ -61,21 +49,9 @@ public class Ball {
             dy = -dy;
         }
 
-        if(y + YSIZE >= this.canvas.getHeight()){
-            y = this.canvas.getHeight() - YSIZE;
+        if(y + diameter >= height){
+            y = height - diameter;
             dy = -dy;
         }
-
-        if (pocket.isInPocket(x + XSIZE / 2, y + YSIZE / 2)) {
-            isActive = false;
-            canvas.repaint();
-            return;
-        }
-
-        this.canvas.repaint();
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 }

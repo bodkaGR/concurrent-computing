@@ -15,15 +15,14 @@ public class BallThread extends Thread {
     @Override
     public void run(){
         try{
-            for(int i = 1; i < 100000; i++){
-                if (ball.isActive()) {
-                    ball.move(canvas.getPocket());
-                    System.out.println("Thread name = " + Thread.currentThread().getName());
-                    Thread.sleep(5);
-                }
+            while (!canvas.isPocketed(ball)) {
+                ball.move(canvas.getWidth(), canvas.getHeight());
+                canvas.repaint();
+                System.out.println("Thread name = " + Thread.currentThread().getName());
+                Thread.sleep(5);
             }
         } catch(InterruptedException ex){
-
+            System.out.println("Thread interrupted: " + ex.getMessage());
         }
     }
 }

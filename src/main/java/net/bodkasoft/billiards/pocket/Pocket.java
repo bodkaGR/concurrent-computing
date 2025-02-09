@@ -1,13 +1,12 @@
 package net.bodkasoft.billiards.pocket;
 
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
+import lombok.Getter;
 
+@Getter
 public class Pocket {
 
-    private final int SIZE = 40;
-    private int x;
-    private int y;
+    private final int diameter = 40;
+    private int x, y;
 
     public Pocket(int width, int height) {
         this.x = width / 2;
@@ -20,11 +19,6 @@ public class Pocket {
     }
 
     public boolean isInPocket(int xValues, int yValues) {
-        return Math.hypot(xValues - x, yValues - y) < SIZE / 2;
-    }
-
-    public void draw(Graphics2D g2) {
-        g2.setColor(Color.red);
-        g2.fill(new Ellipse2D.Double(x - SIZE / 2, y - SIZE / 2, SIZE, SIZE));
+        return Math.hypot(xValues - x, yValues - y) < diameter / 2;
     }
 }
