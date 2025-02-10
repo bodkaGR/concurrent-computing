@@ -6,15 +6,24 @@ public class BallThread extends Thread {
 
     private final Ball ball;
     private final Canvas canvas;
+    private BallThread ballThread;
 
     public BallThread(Ball ball, Canvas canvas){
         this.ball = ball;
         this.canvas = canvas;
     }
 
+    public BallThread(Ball ball, Canvas canvas, BallThread ballThread){
+        this(ball, canvas);
+        this.ballThread = ballThread;
+    }
+
     @Override
     public void run(){
         try{
+            if(ballThread != null){
+                ballThread.join();
+            }
             while (!canvas.isPocketed(ball)) {
                 ball.move(canvas.getWidth(), canvas.getHeight());
                 canvas.repaint();
