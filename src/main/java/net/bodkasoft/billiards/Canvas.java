@@ -17,11 +17,11 @@ public class Canvas extends JPanel {
     private final List<Ball> balls = new ArrayList<>();
 
     private Pocket pocket;
-    private final JLabel counterLabel;
+    private final JLabel pocketedLabel;
     private int pocketedCount = 0;
 
-    public Canvas(JLabel counterLabel) {
-        this.counterLabel = counterLabel;
+    public Canvas(JLabel pocketedLabel) {
+        this.pocketedLabel = pocketedLabel;
     }
 
     public void addBall(Ball b){
@@ -62,7 +62,7 @@ public class Canvas extends JPanel {
             if (!ball.isActive()){
                 iterator.remove();
                 pocketedCount++;
-                counterLabel.setText("Pocketed: " + pocketedCount);
+                pocketedLabel.setText("Pocketed: " + pocketedCount);
             }else {
                 ball.draw(g2);
             }
