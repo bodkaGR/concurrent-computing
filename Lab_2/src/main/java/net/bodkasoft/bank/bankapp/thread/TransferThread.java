@@ -1,6 +1,6 @@
-package net.bodkasoft.bank.thread;
+package net.bodkasoft.bank.bankapp.thread;
 
-import net.bodkasoft.bank.bank.Bank;
+import net.bodkasoft.bank.bankapp.bank.Bank;
 
 public class TransferThread extends Thread {
     private final Bank bank;
@@ -8,10 +8,10 @@ public class TransferThread extends Thread {
     private final int maxAmount;
     private static final int REPS = 1000;
 
-    public TransferThread(Bank bank, int fromAccount, int max){
+    public TransferThread(Bank bank, int fromAccount, int maxAmount){
         this.bank = bank;
         this.fromAccount = fromAccount;
-        maxAmount = max;
+        this.maxAmount = maxAmount;
     }
 
     @Override
