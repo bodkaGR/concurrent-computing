@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public class JournalApplication {
 
     private static final int MAX_GRADES_AMOUNT = 10;
-    private static final int WEEKS_AMOUNT = 5;
+    private static final int WEEKS_AMOUNT = 3;
 
     public static void main(String[] args) {
 
