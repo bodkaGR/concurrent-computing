@@ -14,9 +14,6 @@ public class JournalApplication {
     public static void main(String[] args) {
 
         List<String> group = List.of("Serhii", "Bober", "Maxim", "Volodimir", "Matvei", "Pheodosyi", "Nadia", "Nataliia", "Olha");
-//        List<String> group2 = List.of("Volodimir", "Matvei", "Pheodosyi");
-//        List<String> group3 = List.of("Nadia", "Nataliia", "Olha");
-//        List<String> allStudents = Stream.concat(Stream.concat(group1.stream(), group2.stream()), group3.stream()).toList();
 
         Journal journal = new Journal(group, MAX_GRADES_AMOUNT);
 

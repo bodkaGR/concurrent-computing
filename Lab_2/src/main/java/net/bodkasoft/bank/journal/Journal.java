@@ -33,14 +33,6 @@ public class Journal {
         }
     }
 
-//    public List<Integer> getGrades(String student) {
-//        return grades.get(student);
-//    }
-//
-//    public List<String> getStudents() {
-//        return new ArrayList<>(grades.keySet());
-//    }
-
     public void printStudentsGrades() {
         System.out.println("<---Electronic Journal--->");
         for(Map.Entry<String, List<Integer>> entry: grades.entrySet()) {

@@ -22,9 +22,8 @@ public class Consumer implements Runnable {
         for (int i = 0; i < consumedInfo.length; i++) {
             if ((message = drop.take()) == -1) return;
             consumedInfo[i] = message;
-            System.out.println("MESSAGE RECEIVED: " + message);
             try {
-                Thread.sleep(random.nextInt(2000));
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

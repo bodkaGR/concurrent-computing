@@ -7,7 +7,7 @@ public class WaitNotifyBank extends Bank {
     }
 
     @Override
-    public void transfer(int fromAccount, int toAccount, int amount) {
+    public synchronized void transfer(int fromAccount, int toAccount, int amount) {
         while (accounts[fromAccount] < amount) {
             try {
                 wait();

@@ -10,8 +10,8 @@ public class SymbolPrinterApplication {
     public static void main(String[] args) {
 
         Thread pipeThread = new Thread(() -> printSymbolLines(LINES, '|', 0));
-        Thread slashThread = new Thread(() -> printSymbolLines(LINES, '/', 1));
-        Thread backSlashThread = new Thread(() -> printSymbolLines(LINES, '\\', 2));
+        Thread slashThread = new Thread(() -> printSymbolLines(LINES, '/', 2));
+        Thread backSlashThread = new Thread(() -> printSymbolLines(LINES, '\\', 1));
 
         pipeThread.start();
         slashThread.start();
