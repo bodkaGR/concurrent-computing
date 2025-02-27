@@ -1,4 +1,4 @@
-package net.bodkasoft.matrix;
+package net.bodkasoft.matrix.utils;
 
 import java.util.Arrays;
 
@@ -15,7 +15,7 @@ public class Result {
     }
 
     public void printResult() {
-        System.out.println("<---Result matrix--->");
+        System.out.println("\n<---Result matrix--->");
         for (int i = 0; i < resultMatrix.length; i++) {
             for (int j = 0; j < resultMatrix[i].length; j++) {
                 System.out.print(resultMatrix[i][j] + " ");

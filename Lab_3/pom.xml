@@ -32,7 +32,7 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                             <addClasspath>true</addClasspath>
-                            <mainClass>net.bodkasoft.matrix.MatrixApplication</mainClass>
+                            <mainClass>net.bodkasoft.matrix.MatrixMultiplicationApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
