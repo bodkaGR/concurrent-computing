@@ -1,12 +1,14 @@
-package net.bodkasoft.matrix.executor;
+package net.bodkasoft.matrix;
 
+import net.bodkasoft.matrix.executor.FoxMatrixMultiplicationExecutor;
+import net.bodkasoft.matrix.executor.StripMatrixMultiplicationExecutor;
 import net.bodkasoft.matrix.utils.Result;
 import net.bodkasoft.matrix.matrixmultiplier.ConsistentMatrixMultiplier;
 import net.bodkasoft.matrix.utils.MatrixUtils;
 
 import java.util.Scanner;
 
-public class MatrixMultiplicationExecutor {
+public class MatrixMultiplication {
 
     public static void run(int[][] matrixA, int[][] matrixB, int threadsAmount) {
         displayMatrices(matrixA, matrixB);
@@ -22,16 +24,22 @@ public class MatrixMultiplicationExecutor {
                 new ConsistentMatrixMultiplier(result).multiply(matrixA, matrixB);
                 end = System.currentTimeMillis();
                 System.out.println("Consistent matrix multiplication took: " + (end - start) + "ms");
-                result.printResult();
+//                result.printResult();
             }
             case 2 -> {
                 start = System.currentTimeMillis();
-                new StripMatrixMultiplicationExecutor().execute(matrixA, matrixB, result, threadsAmount);
+                new StripMatrixMultiplicationExecutor(result, threadsAmount).execute(matrixA, matrixB);
                 end = System.currentTimeMillis();
                 System.out.println("Strip matrix multiplication took: " + (end - start) + "ms");
+//                result.printResult();
+            }
+            case 3 -> {
+                start = System.currentTimeMillis();
+                new FoxMatrixMultiplicationExecutor(result, threadsAmount).execute(matrixA, matrixB);
+                end = System.currentTimeMillis();
+                System.out.println("Fox matrix multiplication took: " + (end - start) + "ms");
                 result.printResult();
             }
-            case 3 -> System.out.println("Fox Matrix multiplication is not yet implemented");
             default -> System.out.println("Invalid choice");
         }
     }

@@ -23,8 +23,4 @@ public class Result {
             System.out.println();
         }
     }
-
-    public int[][] getResultMatrix() {
-        return Arrays.copyOf(resultMatrix, resultMatrix.length);
-    }
 }

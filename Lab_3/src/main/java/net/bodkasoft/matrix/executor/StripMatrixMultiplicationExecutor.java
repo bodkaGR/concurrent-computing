@@ -2,11 +2,16 @@ package net.bodkasoft.matrix.executor;
 
 import net.bodkasoft.matrix.utils.Result;
 import net.bodkasoft.matrix.matrixmultiplier.StripMatrixMultiplier;
-import net.bodkasoft.matrix.thread.MatrixTask;
+import net.bodkasoft.matrix.thread.StripMatrixTask;
 
-public class StripMatrixMultiplicationExecutor {
+public class StripMatrixMultiplicationExecutor extends Executor {
 
-    public void execute(int[][] matrixA, int[][] matrixB, Result result, int threadsAmount) {
+    public StripMatrixMultiplicationExecutor(Result result, int threadsAmount) {
+        super(result, threadsAmount);
+    }
+
+    @Override
+    public void execute(int[][] matrixA, int[][] matrixB) {
         Thread[] threads = new Thread[threadsAmount];
         int rowsPerThread = matrixA.length / threadsAmount;
         int extraRows = matrixA.length % threadsAmount;
@@ -17,21 +22,11 @@ public class StripMatrixMultiplicationExecutor {
             int[][] subMatrixA = new int[endRow - startRow][];
             System.arraycopy(matrixA, startRow, subMatrixA, 0, endRow - startRow);
 
-            threads[i] = new Thread(new MatrixTask(subMatrixA, matrixB, new StripMatrixMultiplier(result, startRow)));
+            threads[i] = new Thread(new StripMatrixTask(subMatrixA, matrixB, new StripMatrixMultiplier(result, startRow)));
             threads[i].start();
             startRow = endRow;
         }
 
-        waitForThreads(threads);
-    }
-
-    private void waitForThreads(Thread[] threads) {
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-        }
+        super.waitForThreads(threads);
     }
 }
