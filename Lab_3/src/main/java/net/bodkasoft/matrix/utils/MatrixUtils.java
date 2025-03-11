@@ -8,7 +8,8 @@ public class MatrixUtils {
         int[][] matrix = new int[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                matrix[i][j] = rand.nextInt(100);
+//                matrix[i][j] = rand.nextInt(100);
+                matrix[i][j] = 13;
             }
         }
         return matrix;

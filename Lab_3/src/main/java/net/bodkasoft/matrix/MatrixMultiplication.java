@@ -24,14 +24,14 @@ public class MatrixMultiplication {
                 new ConsistentMatrixMultiplier(result).multiply(matrixA, matrixB);
                 end = System.currentTimeMillis();
                 System.out.println("Consistent matrix multiplication took: " + (end - start) + "ms");
-//                result.printResult();
+                result.printResult();
             }
             case 2 -> {
                 start = System.currentTimeMillis();
                 new StripMatrixMultiplicationExecutor(result, threadsAmount).execute(matrixA, matrixB);
                 end = System.currentTimeMillis();
                 System.out.println("Strip matrix multiplication took: " + (end - start) + "ms");
-//                result.printResult();
+                result.printResult();
             }
             case 3 -> {
                 start = System.currentTimeMillis();

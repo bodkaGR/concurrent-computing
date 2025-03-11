@@ -1,7 +1,5 @@
 package net.bodkasoft.matrix.utils;
 
-import java.util.Arrays;
-
 public class Result {
 
     private final int[][] resultMatrix;

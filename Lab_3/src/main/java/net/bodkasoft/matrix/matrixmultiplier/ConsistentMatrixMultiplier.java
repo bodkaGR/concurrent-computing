@@ -25,5 +25,4 @@ public class ConsistentMatrixMultiplier implements MatrixMultiplier {
             }
         }
     }
-
 }
