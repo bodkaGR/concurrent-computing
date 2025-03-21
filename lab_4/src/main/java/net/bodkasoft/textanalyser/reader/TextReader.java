@@ -42,4 +42,23 @@ public class TextReader {
             e.printStackTrace();
         }
     }
+
+    public List<Integer> readWordsLengths() {
+        List<Integer> wordLengths = new ArrayList<>();
+
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                Matcher matcher = pattern.matcher(line);
+                while (matcher.find()) {
+                    wordLengths.add(matcher.group().length());
+                }
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return wordLengths;
+    }
 }

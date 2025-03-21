@@ -1,24 +1,39 @@
 package net.bodkasoft.textanalyser;
 
-import net.bodkasoft.textanalyser.analyser.impl.ConcurrentFrequenciesAnalyser;
-import net.bodkasoft.textanalyser.analyser.impl.ConsistentFrequenciesAnalyser;
+import net.bodkasoft.textanalyser.analyser.impl.ConcurrentStatisticAnalyser;
+import net.bodkasoft.textanalyser.analyser.impl.ConsistentStatisticAnalyser;
+import net.bodkasoft.textanalyser.executor.Executor;
 import net.bodkasoft.textanalyser.executor.impl.WordsAnalyserExecutor;
 import net.bodkasoft.textanalyser.reader.TextReader;
+import net.bodkasoft.textanalyser.statistic.Statistic;
 
+import javax.swing.*;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        TextReader textReader = new TextReader("war-and-peace.txt");
+        TextReader textReader = new TextReader("200mb.txt");
 
-        long start = System.currentTimeMillis();
-        WordsAnalyserExecutor executor = new WordsAnalyserExecutor(textReader, new ConcurrentFrequenciesAnalyser());
-        executor.execute();
-        long end = System.currentTimeMillis();
+        Statistic consistentStatistic = run(new WordsAnalyserExecutor(textReader, new ConsistentStatisticAnalyser(), "consistent"));
+        Statistic concurrentStatistic = run(new WordsAnalyserExecutor(textReader, new ConcurrentStatisticAnalyser(), "concurrent"));
 
-        Map<Integer, Integer> result = executor.getWordFrequencies();
-        result.forEach((word, count) -> System.out.println(word + ": " + count));
+        System.out.println();
 
-        System.out.println("Total time: " + (end - start) + "ms");
+        System.out.println("Consistent " + consistentStatistic);
+        System.out.println("Concurrent " + concurrentStatistic);
+
+        Map<Integer, Integer> frequencies = consistentStatistic.getFrequencies();
+//        for (Map.Entry<Integer, Integer> entry: frequencies.entrySet()) {
+//            System.out.println(entry.getKey() + ": " + entry.getValue());
+//        }
+
+        SwingUtilities.invokeLater(() -> {
+            HistogramChart chart = new HistogramChart(frequencies);
+            chart.setVisible(true);
+        });
+    }
+
+    private static Statistic run(Executor executor) {
+        return executor.execute();
     }
 }
