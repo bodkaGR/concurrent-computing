@@ -29,7 +29,7 @@ public class Document {
             while ((line = reader.readLine()) != null) {
                 Matcher matcher = pattern.matcher(line);
                 while (matcher.find()) {
-                    words.add(matcher.group());
+                    words.add(matcher.group().toLowerCase());
                 }
             }
         }

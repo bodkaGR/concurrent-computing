@@ -21,8 +21,11 @@ public class WordOccurrencesCounter {
 //        System.out.println("Common words amount: " + countOccurrencesInParallel(folder, commonWords));
 
 // #####################################################################
+        long startTime = System.currentTimeMillis();
         Set<String> commonWords = getCommonWords(folder);
+        long endTime = System.currentTimeMillis();
 
+        System.out.println("Time taken: " + (endTime - startTime) + "ms");
         System.out.println("Words found: " + commonWords.size());
         System.out.println("Common words: " + commonWords);
     }
