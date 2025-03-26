@@ -30,7 +30,7 @@ public class Producer implements Runnable {
                 statistics.incrementRejected();
             }
             try {
-                Thread.sleep(Equations.evenDistribution(100, 500));
+                Thread.sleep(Math.round(Equations.interArrivalTime(0.5)));
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }

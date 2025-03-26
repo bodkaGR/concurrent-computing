@@ -18,9 +18,9 @@ public class QueueMonitor implements Runnable{
         while (!Thread.currentThread().isInterrupted()) {
             int queueSize = queue.size();
             statistics.addQueueLength(queueSize);
-            System.out.println("Поточна кількість задач у черзі: " + queueSize);
+//            System.out.println("Поточна кількість задач у черзі: " + queueSize);
             try {
-                Thread.sleep(300);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
