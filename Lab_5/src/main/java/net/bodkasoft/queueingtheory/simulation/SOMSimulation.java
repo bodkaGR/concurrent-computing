@@ -36,9 +36,6 @@ public class SOMSimulation {
         double avgQueueSize = statistics.getAverageQueueLength();
         double rejectionProbability = statistics.getRejectionProbability(TOTAL_CUSTOMERS);
 
-//        System.out.println("\nAvg queue size: " + statistics.getAverageQueueLength());
-//        System.out.println("Rejection probability: " + statistics.getRejectionProbability(TOTAL_CUSTOMERS));
-
         return new SimulationResult(avgQueueSize, rejectionProbability);
     }
 

@@ -5,7 +5,6 @@ import net.bodkasoft.queueingtheory.stat.Statistics;
 import net.bodkasoft.queueingtheory.task.Task;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Producer for loading tasks in queue
@@ -25,12 +24,12 @@ public class Producer implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < totalCustomers; i++) {
-            Runnable task = new Task(statistics);
+            Runnable task = new Task();
             if (!queue.offer(task)) {
                 statistics.incrementRejected();
             }
             try {
-                Thread.sleep(Math.round(Equations.interArrivalTime(0.5)));
+                Thread.sleep(Math.round(Equations.interProducing(0.5)));
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }

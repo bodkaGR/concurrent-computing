@@ -3,7 +3,6 @@ package net.bodkasoft.queueingtheory;
 import net.bodkasoft.queueingtheory.simulation.SOMSimulation;
 import net.bodkasoft.queueingtheory.simulation.SimulationRunner;
 import net.bodkasoft.queueingtheory.stat.SimulationResult;
-import net.bodkasoft.queueingtheory.stat.Statistics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +17,10 @@ public class QueueingTheory {
 
     public static void main(String[] args) {
         // Simulation with 1 run
-//        SimulationResult result = getSimulationResult();
-//
-//        System.out.println("\nAvg queue size: " + result.getAvgQueueLength());
-//        System.out.println("Rejection probability: " + result.getRejectionProbability());
+        SimulationResult result = getSimulationResult();
+
+        System.out.println("\nAvg queue size: " + result.getAvgQueueLength());
+        System.out.println("Rejection probability: " + result.getRejectionProbability());
 
         // Simulation with 4 runs
         List<Future<SimulationResult>> results = getSimulationResultsBuRuns();
@@ -33,7 +32,6 @@ public class QueueingTheory {
                 throw new RuntimeException(e);
             }
         });
-
     }
 
     private static SimulationResult getSimulationResult() {
@@ -50,7 +48,6 @@ public class QueueingTheory {
         }
 
         executor.shutdown();
-
         return results;
     }
 }
