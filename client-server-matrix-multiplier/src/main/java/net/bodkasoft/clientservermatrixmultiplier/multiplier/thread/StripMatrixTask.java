@@ -1,4 +1,4 @@
-package net.bodkasoft.clientservermatrixmultiplier.thread;
+package net.bodkasoft.clientservermatrixmultiplier.multiplier.thread;
 
 import net.bodkasoft.clientservermatrixmultiplier.dto.Matrix;
 

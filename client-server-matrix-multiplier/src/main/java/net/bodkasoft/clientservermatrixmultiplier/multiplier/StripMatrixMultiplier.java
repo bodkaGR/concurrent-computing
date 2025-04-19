@@ -1,7 +1,7 @@
 package net.bodkasoft.clientservermatrixmultiplier.multiplier;
 
 import net.bodkasoft.clientservermatrixmultiplier.dto.Matrix;
-import net.bodkasoft.clientservermatrixmultiplier.thread.StripMatrixTask;
+import net.bodkasoft.clientservermatrixmultiplier.multiplier.thread.StripMatrixTask;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
