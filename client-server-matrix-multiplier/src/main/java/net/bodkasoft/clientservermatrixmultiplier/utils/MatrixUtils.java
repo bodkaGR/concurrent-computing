@@ -40,7 +40,7 @@ public class MatrixUtils {
 
     public static void writeMatrixToCsv(Matrix matrix, String filePath) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            double[][] data = matrix.getMatrixPointer(); // якщо хочеш без копій
+            double[][] data = matrix.getMatrixPointer();
 
             for (double[] row : data) {
                 StringBuilder line = new StringBuilder();
